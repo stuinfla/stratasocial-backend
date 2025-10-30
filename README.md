@@ -1,81 +1,69 @@
-# StrataSocial Backend Server
+# StrataSocial Backend
 
-This is the backend API server for StrataSocial, replacing the base44 dependency.
+Node.js + Express + PostgreSQL backend for StrataSocial application.
 
-## Quick Start
+## Deployment to Render
 
-### 1. Install Dependencies
+### Quick Deploy
+
+1. Go to https://render.com/
+2. Click "New +" → "Web Service"
+3. Connect this GitHub repository: `stuinfla/stratasocial-backend`
+4. Configure:
+   - **Name**: stratasocial-backend
+   - **Runtime**: Node
+   - **Build Command**: `npm install`
+   - **Start Command**: `npm start`
+   - **Plan**: Free
+
+### Environment Variables
+
+Add these in Render dashboard:
+
+```
+NODE_ENV=production
+GOOGLE_CLIENT_ID=your_google_client_id_from_console
+GOOGLE_CLIENT_SECRET=your_google_client_secret_from_console
+FRONTEND_URL=https://stratasocial-qc2b6xwco-stuart-kerrs-projects.vercel.app
+BACKEND_URL=https://stratasocial-backend.onrender.com
+JWT_SECRET=generate_secure_32_char_random_string
+PORT=3001
+```
+
+**Get OAuth credentials from**: https://console.cloud.google.com/apis/credentials
+**Generate JWT Secret**: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`
+
+Note: `BACKEND_URL` should be set to your actual Render deployment URL after deployment completes.
+
+### Database
+
+Render will automatically create a PostgreSQL database based on `render.yaml` configuration.
+
+## After Deployment
+
+1. Copy your Render deployment URL (e.g., `https://stratasocial-backend-xxxx.onrender.com`)
+2. Update the `BACKEND_URL` environment variable with this URL
+3. Add the callback URL to Google OAuth:
+   - Go to https://console.cloud.google.com/
+   - Navigate to OAuth 2.0 Client credentials
+   - Add `https://stratasocial-backend-xxxx.onrender.com/api/auth/google/callback` to Authorized redirect URIs
+4. Update frontend Vercel environment variables:
+   - `VITE_API_URL`: `https://stratasocial-backend-xxxx.onrender.com/api`
+   - `VITE_BACKEND_URL`: `https://stratasocial-backend-xxxx.onrender.com`
+
+## Local Development
+
 ```bash
-cd server
 npm install
-```
-
-### 2. Set Up Database
-Make sure you have PostgreSQL installed and running.
-
-Create a database:
-```bash
-createdb stratasocial
-```
-
-### 3. Configure Environment
-Copy the example environment file and update with your values:
-```bash
-cp .env.example .env
-```
-
-Required environment variables:
-- `OPENAI_API_KEY` - Your OpenAI API key for LLM functionality
-- `DB_NAME`, `DB_USER`, `DB_PASSWORD` - PostgreSQL credentials
-- `JWT_SECRET` - A secure random string for JWT token signing
-
-### 4. Start the Server
-```bash
-# Development mode (with auto-reload)
 npm run dev
-
-# Production mode
-npm start
 ```
 
-The server will run on `http://localhost:3001` by default.
+Server runs on http://localhost:3001
 
-## API Endpoints
+## Tech Stack
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/auth/me` - Get current user (authenticated)
-- `PATCH /api/auth/me` - Update current user (authenticated)
-
-### Entities
-All entity endpoints follow the pattern:
-- `POST /api/entities/{entity-name}` - Create
-- `GET /api/entities/{entity-name}/:id` - Get by ID
-- `GET /api/entities/{entity-name}?where={}&orderBy={}&limit={}` - Filter
-- `PATCH /api/entities/{entity-name}/:id` - Update
-- `DELETE /api/entities/{entity-name}/:id` - Delete
-
-Available entities:
-- `social-posts`
-- `post-iterations`
-- `companies`
-- `social-media-strategies`
-- `strategy-conversations`
-- `post-performance`
-- `trending-topics`
-- `algorithm-learning`
-- `social-media-scores`
-- `local-listings`
-
-### Integrations
-- `POST /api/integrations/invoke-llm` - Invoke LLM (OpenAI)
-- `POST /api/integrations/generate-image` - Generate image (DALL-E)
-
-## Database Schema
-
-The database schema matches the original base44 structure with 11 main tables. The schema is automatically created/updated when the server starts in development mode.
-
-## Migration from base44
-
-The frontend has been updated to use this API instead of base44. The API client (`src/api/client.js`) provides the same interface as the base44 SDK, making it a drop-in replacement.
+- Node.js + Express
+- PostgreSQL with Sequelize ORM
+- Passport.js for OAuth
+- JWT authentication
+- Google OAuth 2.0
