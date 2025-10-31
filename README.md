@@ -67,3 +67,4 @@ Server runs on http://localhost:3001
 - Passport.js for OAuth
 - JWT authentication
 - Google OAuth 2.0
+
