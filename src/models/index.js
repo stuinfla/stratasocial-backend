@@ -10,6 +10,12 @@ import TrendingTopics from './TrendingTopics.js';
 import AlgorithmLearning from './AlgorithmLearning.js';
 import SocialMediaScore from './SocialMediaScore.js';
 import LocalListing from './LocalListing.js';
+import PostTemplate from './PostTemplate.js';
+import CalendarEvent from './CalendarEvent.js';
+import EmailLog from './EmailLog.js';
+import SocialAccount from './SocialAccount.js';
+import ApiUsageLog from './ApiUsageLog.js';
+import Notification from './Notification.js';
 
 // Define associations
 Company.hasMany(SocialPost, { foreignKey: 'company_id' });
@@ -51,5 +57,11 @@ export {
   TrendingTopics,
   AlgorithmLearning,
   SocialMediaScore,
-  LocalListing
+  LocalListing,
+  PostTemplate,
+  CalendarEvent,
+  EmailLog,
+  SocialAccount,
+  ApiUsageLog,
+  Notification
 };

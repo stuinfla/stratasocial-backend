@@ -19,6 +19,10 @@ const SocialPost = sequelize.define('SocialPost', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  content: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
   input_content: {
     type: DataTypes.TEXT
   },

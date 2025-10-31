@@ -8,7 +8,13 @@ import {
   TrendingTopics,
   AlgorithmLearning,
   SocialMediaScore,
-  LocalListing
+  LocalListing,
+  PostTemplate,
+  CalendarEvent,
+  EmailLog,
+  SocialAccount,
+  ApiUsageLog,
+  Notification
 } from '../models/index.js';
 import { Op } from 'sequelize';
 
@@ -107,3 +113,9 @@ export const trendingTopicsController = new EntityController(TrendingTopics);
 export const algorithmLearningController = new EntityController(AlgorithmLearning);
 export const socialMediaScoreController = new EntityController(SocialMediaScore);
 export const localListingController = new EntityController(LocalListing);
+export const postTemplateController = new EntityController(PostTemplate);
+export const calendarEventController = new EntityController(CalendarEvent);
+export const emailLogController = new EntityController(EmailLog);
+export const socialAccountController = new EntityController(SocialAccount);
+export const apiUsageLogController = new EntityController(ApiUsageLog);
+export const notificationController = new EntityController(Notification);

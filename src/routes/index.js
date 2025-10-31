@@ -12,7 +12,13 @@ import {
   trendingTopicsController,
   algorithmLearningController,
   socialMediaScoreController,
-  localListingController
+  localListingController,
+  postTemplateController,
+  calendarEventController,
+  emailLogController,
+  socialAccountController,
+  apiUsageLogController,
+  notificationController
 } from '../controllers/entity.controller.js';
 
 const router = express.Router();
@@ -53,5 +59,11 @@ createEntityRoutes('trending-topics', trendingTopicsController);
 createEntityRoutes('algorithm-learning', algorithmLearningController);
 createEntityRoutes('social-media-scores', socialMediaScoreController);
 createEntityRoutes('local-listings', localListingController);
+createEntityRoutes('post-templates', postTemplateController);
+createEntityRoutes('calendar-events', calendarEventController);
+createEntityRoutes('email-logs', emailLogController);
+createEntityRoutes('social-accounts', socialAccountController);
+createEntityRoutes('api-usage-logs', apiUsageLogController);
+createEntityRoutes('notifications', notificationController);
 
 export default router;
